@@ -1,16 +1,16 @@
 body {
-  background-color: #fffff2;
+  background-color: #ffffff;
   color: #342e37;
   font-family: sans-serif;
   text-align: center;
   margin: 0;
-  padding: 20px;
+  
 }
 
 .app h1 {
   font-size: 2.5em;
   margin-bottom: 20px;
-  font-family: "Bebas Neue", sans-serif;
+  font-family:  sans-serif;
 }
 
 .buttons {
@@ -23,8 +23,8 @@ body {
 button {
   padding: 20px 40px;
   font-size: 1.2em;
-  border-radius: 5px;
-  font-family: "Bebas Neue", sans-serif;
+  border-radius: 14px;
+  font-family: Poppins, sans-serif;
   border: none;
   background: #23a7c2;
   color: #fffff2;

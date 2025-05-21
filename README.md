@@ -1,46 +1,61 @@
-# Getting Started with Create React App
+Istruzioni per implementare l’app di RIBESdigilab© videoplayer in un tablet con Windows 11 in modalità chiosco
+Di Federico Nigrelli
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+L’app videoplayer alla data attuale si trova nella repository aziendale, https://github.com/ribesdigilab/videoplayer.git
+L’app videoplayer viene sviluppata per visualizzare in un interfaccia web dei file video(testati in .mp4) presenti nella cartella “videos” in fase di sviluppo. Una volta impartito il comando npm run build viene creata la carella build che andra copiata nel tablet, preferibilmente in disco locale C:.
+Una volta creata la cartella build non sara piu possibile modificare l’ordine e la quantità dei video, per qualsiasi intervento ricreare una nuova build e reinserire la nuova build sul disco locale c:
+Le istruzioni seguenti servono per impostare il tablet per la prima volta, successivamente sarà sufficiente copiare una nuova build nel disco locale C tramite l’account amministratore.
 
-## Available Scripts
+Tutte le seguenti istruzioni vanno eseguite sul tablet
+1. Installa Node.js
+Per usare http-server, devi installare Node.js anche sul tablet. Scaricalo da:
+https://nodejs.org/
+Scegli la versione LTS (quella consigliata).
+________________________________________
+2. Installa http-server
+Apri Prompt dei comandi come amministratore e scrivi:
+npm install -g http-server
+________________________________________
 
-In the project directory, you can run:
 
-### `npm start`
+3. Copia sul tablet la cartella build/
+Mettila ad esempio in:
+C:\ReactApp\build
+Assicurati che dentro ci sia anche la sottocartella video/ con i video.
+________________________________________
+4. Crea uno script .bat per avviare il server
+Crea un file start-server.bat con questo contenuto:
+@echo off
+cd C:\ReactApp\build
+http-server -p 3000 -a 127.0.0.1
+(Sostituisci il percorso se diverso)
+________________________________________
+5. Avvia il server all'accesso
+  Premi Win + R, scrivi taskschd.msc e premi Invio.
+Vai su “Libreria Utilità di pianificazione” → Azione → Crea attività…
+Nome: Start HTTP Server
+Spunta “Esegui con i privilegi più elevati”
+Vai alla scheda Trigger → Nuovo → “All'avvio”
+  Vai alla scheda Azioni → Nuovo → Avvia programma:
+•	Programma/script: cmd.exe
+•	Argomenti: /c "C:\start-server.bat"
+Salva tutto
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
 
-### `npm test`
+6. Imposta Accesso Assegnato
+In:
+Impostazioni → Account → Famiglia e altri utenti → Accesso assegnato
+•	Crea (o seleziona) un account locale dedicato.
+•	Seleziona Microsoft Edge come app.
+•	Inserisci l’URL: http://localhost:3000
+________________________________________
+📌 E ora?
+All'accensione, il tablet:
+1.	Avvia l’account assegnato.
+2.	Esegue lo script per il server.
+3.	Apre Edge in modalità chiosco su http://localhost:3000.
+4.	Mostra la tua app React.
+5.	Esegue i video dalla cartella video.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
 
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).

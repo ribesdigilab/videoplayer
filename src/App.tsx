@@ -1,49 +1,61 @@
-import React, { useState } from "react";
+import React, {useRef} from "react";
 import "./App.css";
 
-// Dichiara il tipo mancante per Webpack
-interface WebpackRequire extends NodeRequire {
-  context: (
-    directory: string,
-    useSubdirectories: boolean,
-    regExp: RegExp
-  ) => {
-    keys: () => string[];
-    (key: string): string;
-  };
-}
+export default function App() {
 
-// Estendi require con il metodo context di Webpack
-const requireWithContext = require as WebpackRequire;
+    // riferimento al nodo <iframe>
+    const iframeRef = useRef<HTMLIFrameElement>(null);
 
-// Importa tutti i video da src/videos/
-const importAll = (r: ReturnType<WebpackRequire["context"]>) =>
-  r.keys().map((key) => ({
-    src: r(key),
-    name: key.replace("./", "").replace(/\.[^/.]+$/, ""),
-  }));
+    /** Naviga nella history dell’iframe.
+     *  Se il dominio è diverso dal tuo, il browser blocca l’accesso
+     *  → intercettiamo l’errore e avvisiamo l’utente. */
+    const go = (delta: number) => {
+        try {
+            iframeRef.current?.contentWindow?.history.go(delta);
+        } catch {
+            alert(
+                "Il sito incorporato non consente di navigare dalla pagina genitore (Same-Origin Policy)."
+            );
+        }
+    };
+
+    return (
+        /* Colonna: header fisso in alto + iframe che riempie il resto */
+        <div className="flex flex-col min-h-screen">
+            <header className="bg-blue-frossasco py-8 pl-4">
+                <h1 className="text-3xl font-helvetica font-bold text-left text-yellow-frossasco">
+                    Archivio Digitale
+                </h1>
+            </header>
+
+            <main className="relative flex-1">
+                <iframe
+                    ref={iframeRef}
+                    src="http://www.ciseionline.it/2012/archivio.asp"
+                    title="Archivio CISei"
+                    className="border-none h-screen w-screen"
 
 
-export function App() {
-
-
- const handleBack = () => {
-
-  };
-
-  return (
-    <div className="app text-center">
-      <h1 className="text-2xl bg-blue-300 font-bold flex items-center py-8 pl-4">Archivio Digitale</h1>
-     {/* Se nessun video è selezionato, mostra la lista */}
-        <iframe
-            src="http://www.ciseionline.it/2012/archivio.asp"
-            title="Ribes DigiLab"
-            className="w-screen h-screen border-none"
             sandbox="allow-same-origin allow-scripts allow-popups allow-forms"
-        />
+            />
+        </main>
 
-    </div>
-  );
+    {/* Barra di navigazione */}
+            {/* Barra di navigazione sovrapposta */}
+            <div className="absolute bottom-4 inset-x-0 flex justify-center gap-6">
+                <button
+                    onClick={() => go(-1)}
+                    className="px-6 py-2 bg-blue-frossasco text-white rounded-lg shadow hover:brightness-110 backdrop-blur"
+                >
+                    ← Indietro
+                </button>
+                <button
+                    onClick={() => go(1)}
+                    className="px-6 py-2 bg-blue-frossasco text-white rounded-lg shadow hover:brightness-110 backdrop-blur"
+                >
+                    Avanti →
+                </button>
+            </div>
+        </div>
+    );
 }
-
-export default App;

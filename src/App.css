@@ -1,7 +1,16 @@
+@font-face {
+  font-family: 'Cairoli';
+  src: url('./font/cairoli/Cairoli.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+
+
 body {
-  background-color: #ffffff;
+  background-color: #231f20;
   color: #342e37;
-  font-family: sans-serif;
+  font-family: 'Cairoli', sans-serif;
   text-align: center;
   margin: 0;
   
@@ -10,7 +19,7 @@ body {
 .app h1 {
   font-size: 2.5em;
   margin-bottom: 20px;
-  font-family:  sans-serif;
+  font-family: 'Cairoli', sans-serif;
 }
 
 .buttons {
@@ -24,9 +33,9 @@ button {
   padding: 20px 40px;
   font-size: 1.2em;
   border-radius: 14px;
-  font-family: Poppins, sans-serif;
+  font-family: 'Cairoli', sans-serif;
   border: none;
-  background: #23a7c2;
+  /*background: #406080;*/
   color: #fffff2;
   cursor: pointer;
   transition: background-color 0.3s ease;

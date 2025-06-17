@@ -1,6 +1,11 @@
 import React, { useState } from "react";
 import "./App.css";
 import avatar from "./images/avatarsample.jpg";
+import avatarSarah from "./images/Avatars-03.png";
+import avatarAndrea from "./images/Avatars-02.png";
+import avatarElisa from "./images/Avatars-11.png";
+import avatarRiccardo from "./images/Avatars-01.png";
+
 // Dichiara il tipo mancante per Webpack
 interface WebpackRequire extends NodeRequire {
   context: (
@@ -32,41 +37,76 @@ export function App() {
     setCurrentVideo(null);
   };
 
-  return (
-    <div className="app text-center">
-      <h1 className="text-2xl bg-blue-300 font-bold flex items-center py-8 pl-4">Rubrica</h1>
-     {/* Se nessun video è selezionato, mostra la lista */}
+   return (
+    <div className="app mt-16 text-center">
+      
       {!currentVideo && (
         <div className="flex flex-col">
-          {videos.map((video, index) => (
-            <button
-              key={index}
-              onClick={() => setCurrentVideo(video.src)}
-              className="flex  items-center w-full px-6 py-4 text-left text-[#fdb315] hover:bg-gray-700 transition duration-200 border-b border-gray-700">
-              <img
-                src={avatar} // Sostituisci con il path della tua immagine
-                alt="Anteprima"
-                className="w-12 h-12 rounded-full mr-4 object-cover"
-              />
-              <div className="flex flex-col grid-cols-1">
-                <span className="text-md font-medium break-words leading-tight">
-                Esempio Contatto
-                
-                </span>
-                <span className="text-md font-medium break-words leading-tight">
-                informazione1
-                
-                </span>
-                <span className="text-md font-medium break-words leading-tight">
-                informazione2
-                
-                </span>
-              </div>
-            </button>
-          ))}
+          {videos.map((video, index) => {
+            // Valori di default
+            let nome = "Contatto sconosciuto";
+            let eta = "";
+            let citta = "";
+            let destinazione = "";
+            let imgSrc = avatar;
+            
+
+            // Seleziona informazioni personalizzate
+            if (video.name === "sarah") {
+              nome = "Sarah";
+              eta = "Data di nascita: 1996";
+              citta = "Città di origine: Cervere(CN)";
+              destinazione = "Paese di destinazione: Australia";
+              imgSrc = avatarSarah;
+            } else if (video.name === "andrea") {
+              nome = "Andrea";
+              eta = "Età: circa 40 anni";
+              citta = "Città di origine: Torino";
+              destinazione = "Paese di destinazione: Regno unito";
+              imgSrc = avatarAndrea;
+            }else if (video.name === "elisa") {
+              nome = "Elisa";
+              eta = "Data di nascita: 1986";
+              citta = "Città di origine: Gravellona Toce (VB)";
+              destinazione = "Paese di destinazione: Francia";
+              imgSrc = avatarElisa;
+            }else if (video.name === "riccardo") {
+              nome = "Riccardo";
+              eta = "Data di nascita: 1994";
+              citta = "Città di origine: Torino";
+              destinazione = "Paese di destinazione: Belgio";
+              imgSrc = avatarRiccardo;
+            }
+
+            return (
+              <button
+                key={index}
+                onClick={() => setCurrentVideo(video.src)}
+                className="flex items-center text-3xl w-full px-16 py-4 text-left text-[#fdb315] hover:bg-gray-700 transition duration-200 border-b border-gray-700"
+              >
+                <img
+                  src={imgSrc}
+                  alt="Anteprima"
+                  className="w-18 h-[12rem] rounded-full mr-4 object-cover"
+                />
+                <div className="flex flex-col grid-cols-1">
+                  <span className="text-md font-medium break-words leading-tight">
+                    {nome}
+                  </span>
+                  <span className="text-md font-medium break-words leading-tight">
+                    {eta}
+                  </span>
+                  <span className="text-md font-medium break-words leading-tight">
+                    {citta}
+                  </span><span className="text-md font-medium break-words leading-tight">
+                    {destinazione}
+                  </span>
+                </div>
+              </button>
+            );
+          })}
         </div>
       )}
-
 
       {currentVideo && (
         <div className="mt-6">
@@ -74,13 +114,14 @@ export function App() {
             id="player"
             controls
             autoPlay
-            style={{ maxWidth: "90vw", maxHeight: "60vh" }}
+            style={{ maxWidth: "190vw",marginTop:"20rem", maxHeight: "60vh" }}
             src={currentVideo}
+            
           />
           <div className="mt-4">
             <button
               onClick={handleBack}
-              className="bg-blue-700 text-white rounded hover:bg-gray-600 transition "
+              className="bg-blue-700 text-white rounded hover:bg-gray-600 transition mt-[6rem] px-4 py-2"
             >
               Indietro
             </button>

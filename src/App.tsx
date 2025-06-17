@@ -38,10 +38,10 @@ export function App() {
   };
 
    return (
-    <div className="app mt-16 text-center">
+    <div className="app  text-center">
       
       {!currentVideo && (
-        <div className="flex flex-col">
+        <div className="flex flex-col justify-center items-center min-h-screen">
           {videos.map((video, index) => {
             // Valori di default
             let nome = "Contatto sconosciuto";
@@ -90,15 +90,15 @@ export function App() {
                   className="w-18 h-[12rem] rounded-full mr-4 object-cover"
                 />
                 <div className="flex flex-col grid-cols-1">
-                  <span className="text-md font-medium break-words leading-tight">
+                  <span className="text-md text-4xl break-words leading-tight">
                     {nome}
                   </span>
-                  <span className="text-md font-medium break-words leading-tight">
+                  <span className="text-md text-2xl break-words leading-tight">
                     {eta}
                   </span>
-                  <span className="text-md font-medium break-words leading-tight">
+                  <span className="text-md text-2xl break-words leading-tight">
                     {citta}
-                  </span><span className="text-md font-medium break-words leading-tight">
+                  </span><span className="text-md text-2xl break-words leading-tight">
                     {destinazione}
                   </span>
                 </div>

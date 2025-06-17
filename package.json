@@ -11,6 +11,7 @@
     "@types/node": "^16.18.126",
     "@types/react": "^19.1.4",
     "@types/react-dom": "^19.1.5",
+    "dotenv": "^16.5.0",
     "express": "^5.1.0",
     "http-proxy-middleware": "^3.0.5",
     "react": "^19.1.0",
@@ -20,10 +21,10 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "start": "cross-env PORT=3000 react-scripts start",
+    "proxy": "ts-node-dev --respawn proxy-server.ts",
+    "dev": "concurrently \"npm run start\" \"npm run proxy\"",
+    "build": "react-scripts build"
   },
   "eslintConfig": {
     "extends": [
@@ -44,6 +45,11 @@
     ]
   },
   "devDependencies": {
-    "tailwindcss": "^3.4.17"
+    "concurrently": "^9.1.2",
+    "cross-env": "^7.0.3",
+    "nodemon": "^3.1.10",
+    "pkg": "^5.8.1",
+    "tailwindcss": "^3.4.17",
+    "ts-node-dev": "^2.0.0"
   }
 }

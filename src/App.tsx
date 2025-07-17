@@ -55,14 +55,14 @@ export function App() {
             if (video.name === "sarah") {
               nome = "Sarah";
               eta = "Data di nascita: 1996";
-              citta = "Città di origine: Cervere(CN)";
+              citta = "Città di origine: Cervere (CN)";
               destinazione = "Paese di destinazione: Australia";
               imgSrc = avatarSarah;
             } else if (video.name === "andrea") {
               nome = "Andrea";
               eta = "Età: circa 40 anni";
               citta = "Città di origine: Torino";
-              destinazione = "Paese di destinazione: Regno unito";
+              destinazione = "Paese di destinazione: Regno Unito";
               imgSrc = avatarAndrea;
             }else if (video.name === "elisa") {
               nome = "Elisa";
@@ -109,25 +109,23 @@ export function App() {
       )}
 
       {currentVideo && (
-        <div className="mt-6">
-          <video
-            id="player"
-            controls
-            autoPlay
-            style={{ maxWidth: "190vw",marginTop:"20rem", maxHeight: "60vh" }}
-            src={currentVideo}
-            
-          />
-          <div className="mt-4">
-            <button
-              onClick={handleBack}
-              className="bg-blue-700 text-white rounded hover:bg-gray-600 transition mt-[6rem] px-4 py-2"
-            >
-              Indietro
-            </button>
-          </div>
-        </div>
-      )}
+  <div className="flex flex-col items-center justify-center min-h-screen">
+    <video
+      id="player"
+      controls
+      autoPlay
+      className=" mt-4"
+      src={currentVideo}
+    />
+    <button
+      onClick={handleBack}
+      className="bg-blue-700 text-white rounded hover:bg-gray-600 transition mt-8 px-4 py-2"
+    >
+      Indietro
+    </button>
+  </div>
+)}
+
     </div>
   );
 }
